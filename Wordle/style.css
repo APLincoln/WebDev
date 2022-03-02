@@ -1,0 +1,114 @@
+:root{
+    --text-primary: black;
+    --text-secondary: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+body,
+html{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+}
+
+header{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: blue;
+    font-size: 4rem;
+    color: var(--text-secondary);
+
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.word-grid{
+    display: grid;
+    margin-top: 2rem;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+}
+
+.letter-box{
+    display: flex;
+    height: 4rem;
+    width: 4rem;
+    background: rgb(56, 134, 223);
+    justify-content: center;
+    align-items: center;
+    color: var(--text-secondary);
+    border-radius: 25%;
+}
+
+.key-board{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+
+.key-row{
+    display: flex;
+    margin: 0 auto 8px;
+
+}
+
+.key{
+    display: flex;
+    height: 50px;
+    width: 50px;
+    background: grey;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-primary);
+    border-radius: 15%;
+}
+
+.space-half{
+    flex: 0.5;
+}
+
+.bigger-button{
+    flex:1.5rem;
+    font-size: 12px;
+}
+
+button{
+    font-family: inherit;
+    font-weight: bold;
+    padding: 1rem;
+    margin: 0 6px 0 0;
+    width: auto;
+    height: 50px;
+    border-radius: 5px;
+    background-color: rgb(156, 148, 148);
+    color: var(--text-secondary);
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+}
+.side-bar{
+    display: grid;
+    grid: repeat(5,1fr) / auto-flow;
+    background: blue;
+    width: 3rem;
+
+}
+
+.side-ele{
+    display:flex;
+    margin-top: 100px;
+}
