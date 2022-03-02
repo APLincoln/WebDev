@@ -1,6 +1,7 @@
 :root{
     --text-primary: black;
     --text-secondary: white;
+    --border-primary: (rgb(56, 134, 223));
     font-family: 'Roboto', sans-serif;
 }
 
@@ -8,6 +9,7 @@ body,
 html{
     margin: 0;
     padding: 0;
+    background-color: rgb(209, 209, 209);
 }
 
 body{
@@ -20,7 +22,7 @@ header{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: blue;
+    background-color: rgb(56, 134, 223);
     font-size: 4rem;
     color: var(--text-secondary);
 
@@ -85,30 +87,39 @@ main{
 }
 
 button{
+    display: flex;
+    flex: 1;
     font-family: inherit;
     font-weight: bold;
     padding: 1rem;
     margin: 0 6px 0 0;
     width: auto;
-    height: 50px;
+    height: auto;
     border-radius: 5px;
     background-color: rgb(156, 148, 148);
     color: var(--text-secondary);
-    flex: 1;
-    display: flex;
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
 }
 .side-bar{
     display: grid;
-    grid: repeat(5,1fr) / auto-flow;
-    background: blue;
-    width: 3rem;
+    position: fixed;
+    flex-direction: column;
+    grid: repeat(5,1fr);
+    background: rgb(56, 134, 223);
+    width: 60px;
+    height: 100%;
+    justify-content: stretch;
+    align-items: flex-start;
 
 }
 
 .side-ele{
     display:flex;
+    flex: wrap;
     margin-top: 100px;
+    justify-content: flex-end;
+    align-items: flex-end;
+
 }
