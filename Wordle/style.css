@@ -33,11 +33,15 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height:100%;
 }
 
 .word-grid{
     display: grid;
     margin-top: 2rem;
+    padding: .5rem;
+    border-radius: 3%;
+    background-color: rgb(116, 116, 116);
     grid-template-rows: repeat(6, 1fr);
     grid-template-columns: repeat(5, 1fr);
     gap: 0.5rem;
@@ -105,21 +109,35 @@ button{
 .side-bar{
     display: grid;
     position: fixed;
-    flex-direction: column;
-    grid: repeat(5,1fr);
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(3, 5rem);
     background: rgb(56, 134, 223);
+    justify-items: center;
+    align-items: center;
     width: 60px;
     height: 100%;
-    justify-content: stretch;
-    align-items: flex-start;
-
 }
 
 .side-ele{
     display:flex;
     flex: wrap;
     margin-top: 100px;
-    justify-content: flex-end;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: center;
 
 }
+
+
+.svg-icon {
+    width: 2em;
+    height: 2em;
+  }
+  .svg-icon path,
+  .svg-icon polygon,
+  .svg-icon rect {
+    fill: black;
+  }
+  .svg-icon circle {
+    stroke: #4691f6;
+    stroke-width: 1;
+  }
