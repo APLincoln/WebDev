@@ -21,7 +21,7 @@ function validKey(a){
     else {return "invalid";}
 }
 
-
+//This takes keyboard input and writed character to uppercase
 window.onkeydown = function(event){
 
     wordGrid = document.getElementById('word_grid');
@@ -30,7 +30,8 @@ window.onkeydown = function(event){
             if(charIndex > wordEnd[currentGuess]){
                 console.log("please check word");
                 break;}
-            wordGrid.children[charIndex].textContent = event.key;
+            let char = event.key;
+            wordGrid.children[charIndex].textContent = event.key.toUpperCase();
             charIndex += 1;
             break;
         case "check":
