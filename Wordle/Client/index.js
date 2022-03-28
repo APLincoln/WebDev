@@ -1,11 +1,10 @@
+import express from 'express';
+
+
 let charIndex = 0; //This is the index for the div that you are typing in
 let currentGuess = 0; // This is the current work to be checked // list of checked words. 0=not checked 1=checked
-const wordStart = [0,5,10,15,20,25]
-const wordEnd = [4,9,14,19,24,29]; // This is the maximum Char for each word
-
-//key codes for a-z are 65-90
-//key code for enter is 13
-//key code for backspace 8
+const wordStart = [0,5,10,15,20,25];
+const wordEnd = [4,9,14,19,24,29];
 
 
 function pageLoaded(){
@@ -21,6 +20,15 @@ function validKey(a){
     else {return "invalid";}
 }
 
+function getWord(start, end, wordGrid){
+    guessArr = ["","","","",""];
+    for(let i = 0; start<=end; i++){
+        guessArr[i] = wordGrid[start];
+        start++;
+    }
+    return guessArr;
+}
+
 //This takes keyboard input and writed character to uppercase
 window.onkeydown = function(event){
 
@@ -30,12 +38,12 @@ window.onkeydown = function(event){
             if(charIndex > wordEnd[currentGuess]){
                 console.log("please check word");
                 break;}
-            let char = event.key;
             wordGrid.children[charIndex].textContent = event.key.toUpperCase();
             charIndex += 1;
             break;
         case "check":
             if(charIndex > wordEnd[currentGuess]){
+                let guessArr = getword(wordStart[currentGuess], wordEnd[currentGuess], wordGrid);
                 currentGuess ++;
                 console.log("word checked");
             }
