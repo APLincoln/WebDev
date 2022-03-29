@@ -44,9 +44,7 @@ window.onkeydown = function(event){
         case "check":
             if(charIndex > wordEnd[currentGuess]){
                 let guessArr = getWord(wordStart[currentGuess], wordEnd[currentGuess], wordGrid);
-                console.log(guessArr);
-                console.log(sendWord(guessArr));
-
+                setColour(wordStart[currentGuess], wordEnd[currentGuess], wordGrid, sendWord(guessArr));
                 currentGuess ++;
                 console.log("word checked");
             }
@@ -64,6 +62,22 @@ window.onkeydown = function(event){
     }
 }
 
+function setColour(start, end, wordGrid, response){
+    for(let i = 0; start<end; i++){
+        switch (response[i]){
+            case 2:
+                wordGrid.children[i].classList.add("green-box");
+                start++;
+                break;
+            case 1:
+                wordGrid.children[i].classList.add("orange-box");
+                start++;
+                break; 
+        }
+    }
+}
+
+//This fuction sends word to the server and returns the response
 async function sendWord(word){
     console.log(word);
     const payload = { guess: word };
@@ -73,10 +87,10 @@ async function sendWord(word){
         body: JSON.stringify({ guess: word })
     })
     .then(response => {
-        console.log(response)
         response.json()
         .then(data => {
-            console.log(data);
+            vals = data;
+            return vals;
         });
     });
 }

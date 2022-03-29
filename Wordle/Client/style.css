@@ -141,3 +141,10 @@ button{
     stroke: #4691f6;
     stroke-width: 1;
   }
+
+.green-box{
+    background-color:rgb(55, 160, 99);
+}
+.orange-box{
+    background-color: rgb(211, 82, 35);
+}
