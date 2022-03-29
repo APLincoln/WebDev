@@ -1,11 +1,27 @@
 {
-  "name": "wordle",
+  "name": "webdev",
   "version": "1.0.0",
-  "description": "This is my version of wordle",
+  "description": "wordle plus",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node Server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UP2044509/WebDev.git"
   },
   "author": "Arron",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UP2044509/WebDev/issues"
+  },
+  "homepage": "https://github.com/UP2044509/WebDev#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15",
+    "path": "^0.12.7"
+  }
 }

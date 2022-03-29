@@ -1,4 +1,4 @@
-import express from 'express';
+
 
 
 let charIndex = 0; //This is the index for the div that you are typing in
@@ -23,7 +23,7 @@ function validKey(a){
 function getWord(start, end, wordGrid){
     guessArr = ["","","","",""];
     for(let i = 0; start<=end; i++){
-        guessArr[i] = wordGrid[start];
+        guessArr[i] = wordGrid.children[start].textContent;
         start++;
     }
     return guessArr;
@@ -43,7 +43,10 @@ window.onkeydown = function(event){
             break;
         case "check":
             if(charIndex > wordEnd[currentGuess]){
-                let guessArr = getword(wordStart[currentGuess], wordEnd[currentGuess], wordGrid);
+                let guessArr = getWord(wordStart[currentGuess], wordEnd[currentGuess], wordGrid);
+                console.log(guessArr);
+                console.log(sendWord(guessArr));
+
                 currentGuess ++;
                 console.log("word checked");
             }
@@ -61,5 +64,21 @@ window.onkeydown = function(event){
     }
 }
 
+async function sendWord(word){
+    console.log(word);
+    const payload = { guess: word };
+    let result = await fetch( 'http://localhost:8080/wordCheck' , {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ guess: word })
+    })
+    .then(response => {
+        console.log(response)
+        response.json()
+        .then(data => {
+            console.log(data);
+        });
+    });
+}
 
 window.addEventListener('load', pageLoaded)
