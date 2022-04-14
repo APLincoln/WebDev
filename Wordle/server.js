@@ -21,7 +21,7 @@ let ans = [0,0,0,0,0];
 let guess = ["","","","",""];
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(dirname(__dirname), 'Client/index.html'));
+  res.sendFile(path.join(__dirname, 'Client/index.html'));
 });
 
 app.post('/wordCheck', express.json(), (req, res) => {
