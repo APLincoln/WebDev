@@ -1,96 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "styleSheet" href = "style.css" >
+    <link rel="styleSheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
     <script src="index.js"></script>
     <title>Wordle</title>
 </head>
+
+
+
 <body>
-    <header >Wordle</header>
-    <div class="side-bar">
-        <div class="flex-ele">
-            <svg class="svg-icon" viewBox="0 0 20 20">
-                <path d="M18.121,9.88l-7.832-7.836c-0.155-0.158-0.428-0.155-0.584,0L1.842,9.913c-0.262,0.263-0.073,0.705,0.292,0.705h2.069v7.042c0,0.227,0.187,0.414,0.414,0.414h3.725c0.228,0,0.414-0.188,0.414-0.414v-3.313h2.483v3.313c0,0.227,0.187,0.414,0.413,0.414h3.726c0.229,0,0.414-0.188,0.414-0.414v-7.042h2.068h0.004C18.331,10.617,18.389,10.146,18.121,9.88 M14.963,17.245h-2.896v-3.313c0-0.229-0.186-0.415-0.414-0.415H8.342c-0.228,0-0.414,0.187-0.414,0.415v3.313H5.032v-6.628h9.931V17.245z M3.133,9.79l6.864-6.868l6.867,6.868H3.133z"></path>
-            </svg>
-        </div>
-        <div class="flex-ele">leader board</div>
-        <div class = "flex-ele">settings</div>
-    </div>
-    <main>
-        <div id="word_grid" class = "word-grid">
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-            <div class = "letter-box"></div>
-        </div>
-        <div class = "key-board">
-            <div class = "key-row">
-                <button data-key="q">q</button>
-                <button data-key="w">w</button>
-                <button data-key="e">e</button>
-                <button data-key="r">r</button>
-                <button data-key="t">t</button>
-                <button data-key="y">y</button>
-                <button data-key="u">u</button>
-                <button data-key="i">i</button>
-                <button data-key="o">o</button>
-                <button data-key="p">p</button>
+    <header>Wordle</header>
+    <div class="gameContainer">
+        <div class="side-bar">
+            <div class="flex-ele">
+                <svg class="svg-icon" viewBox="0 0 20 20">
+                    <path
+                        d="M18.121,9.88l-7.832-7.836c-0.155-0.158-0.428-0.155-0.584,0L1.842,9.913c-0.262,0.263-0.073,0.705,0.292,0.705h2.069v7.042c0,0.227,0.187,0.414,0.414,0.414h3.725c0.228,0,0.414-0.188,0.414-0.414v-3.313h2.483v3.313c0,0.227,0.187,0.414,0.413,0.414h3.726c0.229,0,0.414-0.188,0.414-0.414v-7.042h2.068h0.004C18.331,10.617,18.389,10.146,18.121,9.88 M14.963,17.245h-2.896v-3.313c0-0.229-0.186-0.415-0.414-0.415H8.342c-0.228,0-0.414,0.187-0.414,0.415v3.313H5.032v-6.628h9.931V17.245z M3.133,9.79l6.864-6.868l6.867,6.868H3.133z">
+                    </path>
+                </svg>
             </div>
-            <div class = "key-row">
-                <div class="space-half"></div>
-                <button data-key="a">a</button>
-                <button data-key="s">s</button>
-                <button data-key="d">d</button>
-                <button data-key="f">f</button>
-                <button data-key="g">g</button>
-                <button data-key="h">h</button>
-                <button data-key="j">j</button>
-                <button data-key="k">k</button>
-                <button data-key="l">l</button>
-                <div class="space-half"></div>
-            </div>
-            <div class = "key-row">
-                <button class="bigger-button" data-key="enter">enter</button>
-                <button data-key="z">z</button>
-                <button data-key="x">x</button>
-                <button data-key="c">c</button>
-                <button data-key="v">v</button>
-                <button data-key="b">b</button>
-                <button data-key="n">n</button>
-                <button data-key="m">m</button>
-                <button class="bigger-button" data-key="return">return</button>
-            </div>
+            <div class="flex-ele">leader board</div>
+            <div class="flex-ele">settings</div>
         </div>
-    </main>
+        <main>
+            <div id="word_grid" class="word-grid">
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+                <div class="letter-box"></div>
+            </div>
+            <div class="key-board">
+                <div class="key-row">
+                    <button className="key" data-key="q">q</button>
+                    <button data-key="w">w</button>
+                    <button data-key="e">e</button>
+                    <button data-key="r">r</button>
+                    <button data-key="t">t</button>
+                    <button data-key="y">y</button>
+                    <button data-key="u">u</button>
+                    <button data-key="i">i</button>
+                    <button data-key="o">o</button>
+                    <button data-key="p">p</button>
+                </div>
+                <div class="key-row">
+                    <div class="space-half"></div>
+                    <button data-key="a">a</button>
+                    <button data-key="s">s</button>
+                    <button data-key="d">d</button>
+                    <button data-key="f">f</button>
+                    <button data-key="g">g</button>
+                    <button data-key="h">h</button>
+                    <button data-key="j">j</button>
+                    <button data-key="k">k</button>
+                    <button data-key="l">l</button>
+                    <div class="space-half"></div>
+                </div>
+                <div class="key-row">
+                    <button class="bigger-button" data-key="enter">enter</button>
+                    <button data-key="z">z</button>
+                    <button data-key="x">x</button>
+                    <button data-key="c">c</button>
+                    <button data-key="v">v</button>
+                    <button data-key="b">b</button>
+                    <button data-key="n">n</button>
+                    <button data-key="m">m</button>
+                    <button class="bigger-button" data-key="return">return</button>
+                </div>
+            </div>
+        </main>
 </body>
+
 </html>

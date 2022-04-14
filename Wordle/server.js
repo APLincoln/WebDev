@@ -1,15 +1,17 @@
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
+import words from './words.js';
 //This is the import of the guess handler
 import * as gh from './guessHandler.js';
+import { stringify } from 'querystring';
 
 const app = express();
 app.use(express.static('client'));
 app.use(cors({origin: "http://localhost:8080/"}))
 app.listen(8080);
 
-const word = "HELLO"
+let word = wordOfDay(words);
 let ans = [0,0,0,0,0];
 let guess = ["","","","",""];
 
@@ -21,7 +23,7 @@ app.post('/wordCheck', express.json(), (req, res) => {
   let result = wordChecker(req.body.guess, word, ans);
   res.setHeader('Content-Type', 'application/json');
   console.log(result);
-  res.json(result);
+  res.send(result);
 });
 
 function wordChecker(guess, word, ans){
@@ -49,3 +51,9 @@ function wordChecker(guess, word, ans){
     console.log(ans);
     return ans;
   }
+
+function wordOfDay(words){
+  let word = words[(Math.floor(Math.random()*words.length))].toUpperCase();
+  console.log(word);
+  return word;
+}

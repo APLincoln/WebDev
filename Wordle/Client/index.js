@@ -43,13 +43,14 @@ window.onkeydown = function(event){
             break;
         case "check":
             if(charIndex > wordEnd[currentGuess]){
+                let start = wordStart[currentGuess];
+                let end = wordEnd[currentGuess];
                 let guessArr = getWord(wordStart[currentGuess], wordEnd[currentGuess], wordGrid);
-                setColour(wordStart[currentGuess], wordEnd[currentGuess], wordGrid, sendWord(guessArr));
-                currentGuess ++;
-                console.log("word checked");
+                console.log(currentGuess);
+                sendWord(guessArr, start, end, wordGrid);
             }
             else {console.log("This is not a full word please try again");}
-            break;//run word checker
+            break;
         case "back":
             if(charIndex != wordStart[currentGuess]){
                 charIndex --
@@ -62,37 +63,53 @@ window.onkeydown = function(event){
     }
 }
 
-function setColour(start, end, wordGrid, response){
-    for(let i = 0; start<end; i++){
-        switch (response[i]){
+function setColour(start, end, wordGrid, letterPos){
+    for(let i = 0; start<=end; i++){
+        switch (letterPos[i]){
             case 2:
-                wordGrid.children[i].classList.add("green-box");
+                wordGrid.children[start].classList.add("green-box");
                 start++;
                 break;
             case 1:
-                wordGrid.children[i].classList.add("orange-box");
+                wordGrid.children[start].classList.add("orange-box");
                 start++;
-                break; 
+                break;
+            default:
+                start++;
+                break;
         }
     }
 }
 
-//This fuction sends word to the server and returns the response
-async function sendWord(word){
+//This function sends word to the server and returns the response
+async function sendWord(word, start, end, wordGrid){
+    //debugger;
     console.log(word);
     const payload = { guess: word };
-    let result = await fetch( 'http://localhost:8080/wordCheck' , {
+    console.log(payload);
+    const response = await fetch( 'http://localhost:8080/wordCheck' , {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ guess: word })
-    })
-    .then(response => {
-        response.json()
-        .then(data => {
-            vals = data;
-            return vals;
-        });
+        body: JSON.stringify(payload),
     });
+
+    if(response.ok){
+        data = await response.json();
+        console.log(data);
+        setColour(start, end, wordGrid, data);
+        currentGuess ++;
+        console.log("word checked");
+    }
+    else{}
+    // .then(response => {
+    //     response.json()
+    //     .then(data => {
+    //         console.log(data);
+    //         setColour(start, end, wordGrid, data);
+    //         currentGuess ++;
+    //         console.log("word checked");
+    //     });
+    // });
 }
 
 window.addEventListener('load', pageLoaded)
