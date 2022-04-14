@@ -92,8 +92,6 @@ main{
 
 .key{
     display: flex;
-    height: 1vh;
-    width: 1vw;
     background: grey;
     justify-content: center;
     align-items: center;
@@ -105,10 +103,16 @@ main{
     flex: 0.5;
 }
 
-.bigger-button{
+.enter{
     flex:1.5;
     font-size: 12px;
 }
+
+.return{
+    flex:1.5;
+    font-size: 12px;
+}
+
 
 button{
     display: flex;

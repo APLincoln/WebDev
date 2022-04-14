@@ -43,7 +43,7 @@ function wordChecker(guess, word, ans){
         guess[i] = "";
         }
     }
-    //second loop for contains
+    //second loop for word contains but not in right position
     for(let i = 0; i<wordOfDay.length; i++){
     if(guess[i]!= "" && wordOfDay.includes(guess[i])){
         ans[i] = 1;
@@ -53,10 +53,10 @@ function wordChecker(guess, word, ans){
         guess[i] = "";
         }
     }
-    console.log(ans);
     return ans;
   }
 
+// This sets the word of the day 
 function wordOfDay(words){
   let word = words[(Math.floor(Math.random()*words.length))].toUpperCase();
   console.log(word);

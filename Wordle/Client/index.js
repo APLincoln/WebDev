@@ -1,14 +1,47 @@
 
-
-
+let key = document.querySelectorAll('.key');
 let charIndex = 0; //This is the index for the div that you are typing in
 let currentGuess = 0; // This is the current work to be checked // list of checked words. 0=not checked 1=checked
 const wordStart = [0,5,10,15,20,25];
 const wordEnd = [4,9,14,19,24,29];
+let wordGrid = document.getElementById('word_grid');
+let enter = document.querySelector('.enter');
+let back = document.querySelector('.return');
 
+//this adds event listeners to all of the keys
+for(let i = 0; i<key.length; i++){
+    key[i].addEventListener('click', keyInput)
+} 
 
-function pageLoaded(){
-    
+// This adds event listener to enter
+enter.addEventListener('click', (event) => {
+    if(charIndex > wordEnd[currentGuess]){
+        let start = wordStart[currentGuess];
+        let end = wordEnd[currentGuess];
+        let guessArr = getWord(wordStart[currentGuess], wordEnd[currentGuess], wordGrid);
+        console.log(currentGuess);
+        sendWord(guessArr, start, end, wordGrid);
+    }
+    else {console.log("This is not a full word please try again");}
+})
+
+// This adds event listener to backspace
+back.addEventListener('click', (event) => {
+    if(charIndex != wordStart[currentGuess]){
+        charIndex --
+        wordGrid.children[charIndex].textContent = "";
+    }
+})
+
+//This changes text content based on key pressed on screen
+function keyInput(event){
+    let char = event.target.textContent;
+    if(charIndex > wordEnd[currentGuess]){
+        console.log("please check word");
+        return;
+    }
+    wordGrid.children[charIndex].textContent = char.toUpperCase();
+    charIndex += 1;
 }
 
 //This checks an input and returns a string for the switch case
@@ -20,6 +53,7 @@ function validKey(a){
     else {return "invalid";}
 }
 
+//This gets the word from the boxes on the word grid and returns as an array
 function getWord(start, end, wordGrid){
     guessArr = ["","","","",""];
     for(let i = 0; start<=end; i++){
@@ -29,10 +63,9 @@ function getWord(start, end, wordGrid){
     return guessArr;
 }
 
-//This takes keyboard input and writed character to uppercase
+//This handles the user keyboard input and manages the game as it progresses
 window.onkeydown = function(event){
 
-    wordGrid = document.getElementById('word_grid');
     switch(validKey(event.keyCode)){
         case "letter":
             if(charIndex > wordEnd[currentGuess]){
@@ -63,6 +96,7 @@ window.onkeydown = function(event){
     }
 }
 
+//This sets the colour of the letter boxes depending on location in the actual word
 function setColour(start, end, wordGrid, letterPos){
     for(let i = 0; start<=end; i++){
         switch (letterPos[i]){
@@ -112,4 +146,3 @@ async function sendWord(word, start, end, wordGrid){
     // });
 }
 
-window.addEventListener('load', pageLoaded)
