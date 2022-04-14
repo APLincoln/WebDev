@@ -5,9 +5,14 @@ import words from './words.js';
 //This is the import of the guess handler
 import * as gh from './guessHandler.js';
 import { stringify } from 'querystring';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
-app.use(express.static('client'));
+app.use(express.static('Client'));
 app.use(cors({origin: "http://localhost:8080/"}))
 app.listen(8080);
 
@@ -16,7 +21,7 @@ let ans = [0,0,0,0,0];
 let guess = ["","","","",""];
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/index.html'));
+  res.sendFile(path.join(dirname(__dirname), 'Client/index.html'));
 });
 
 app.post('/wordCheck', express.json(), (req, res) => {
