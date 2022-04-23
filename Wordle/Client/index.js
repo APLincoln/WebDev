@@ -11,7 +11,7 @@ let back = document.querySelector('.return');
 //this adds event listeners to all of the keys
 for(let i = 0; i<key.length; i++){
     key[i].addEventListener('click', keyInput)
-} 
+}
 
 // This adds event listener to enter
 enter.addEventListener('click', (event) => {
@@ -129,20 +129,25 @@ async function sendWord(word, start, end, wordGrid){
 
     if(response.ok){
         data = await response.json();
-        console.log(data);
-        setColour(start, end, wordGrid, data);
-        currentGuess ++;
-        console.log("word checked");
+        if(data.length<1){
+            console.log("word is not in list");
+            let notif = document.querySelector(".notif");
+            notif.textContent = "Not a word";
+            return;
+        }
+        else if(data == [2,2,2,2,2]){
+            setColour(start, end, wordGrid, data);
+            console.log("Winner!")
+            let notif = document.querySelector(".notif");
+            notif.textContent = "Winner!";
+        }
+        else{
+            console.log(data.length);
+            setColour(start, end, wordGrid, data);
+            currentGuess ++;
+            console.log("word checked");
+        }
     }
     else{}
-    // .then(response => {
-    //     response.json()
-    //     .then(data => {
-    //         console.log(data);
-    //         setColour(start, end, wordGrid, data);
-    //         currentGuess ++;
-    //         console.log("word checked");
-    //     });
-    // });
 }
 

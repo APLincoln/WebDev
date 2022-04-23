@@ -77,8 +77,8 @@ main{
     display: flex;
     flex-direction: column;
     margin-top: 3rem;
-    width: 50%;
-    height: 20vh;
+    width: 35%;
+    height: 23vh;
 }
 
 .key-row{
