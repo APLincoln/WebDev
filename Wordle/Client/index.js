@@ -5,17 +5,19 @@ let currentGuess = 0; // This is the current work to be checked // list of check
 const wordStart = [0,5,10,15,20,25];
 const wordEnd = [4,9,14,19,24,29];
 let wordGrid = document.getElementById('word_grid');
-let enter = document.querySelector('.enter');
-let back = document.querySelector('.return');
-let canType = true;
+let enter = document.querySelector('.enter'); //Used for the on-screen keyboard
+let back = document.querySelector('.return'); //Used for the on-scree keyboard
+let canType = true; //This boolean is set so the user is allowed to type into the boxes
 let currentState = null;
+let currentStat = null;
 //These are the local storage default objects
 const gameStats = {
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
+    one: 0,
+    two: 0,
+    three: 0,
+    four: 0,
+    five: 0,
+    six: 0,
     winStreak: 0
 }
 const gameState = {
@@ -27,7 +29,7 @@ const gameState = {
 
 window.addEventListener('load', () => {
     localStorageInit();
-    let currentGameStats = window.JSON.parse(localStorage.getItem('gameStats'));
+    currentStat = window.JSON.parse(localStorage.getItem('gameStats'));
     currentState = window.JSON.parse(localStorage.getItem('gameState'));
     resumeGame(currentState);
 })
@@ -43,6 +45,7 @@ function localStorageInit(){
 
 }
 
+//Returs the game to the state it was when the user left
 function resumeGame(state){
     for(let i = 0; i<state.guesses.length; i++){
         //console.log(state.guesses[i])
@@ -60,12 +63,12 @@ function resumeGame(state){
     currentGuess  = state.currentGuess
 }
 
-//this adds event listeners to all of the keys
+//This adds event listeners to all of the keys
 for(let i = 0; i<key.length; i++){
     key[i].addEventListener('click', keyInput)
 }
 
-// This adds event listener to enter
+//This adds event listener to enter
 enter.addEventListener('click', (event) => {
     if(canType){
     if(charIndex > wordEnd[currentGuess]){
@@ -191,8 +194,15 @@ async function sendWord(word, start, end, currentState,canType){
             notAWord();
         }
         else if(count == 5){
+            setStates(word, currentGuess+1, data, currentGuess);
+            setStats();
             winner(start, end, wordGrid, data);
-            setStates(word, currentGuess, data, currentGuess)
+        }
+        else if (currentGuess == 5){
+            currentStat.winStreak = 0;
+            localStorage.setItem("gameStats",JSON.stringify(currentStat));
+            notWinner(start, end, wordGrid, data);
+            setStates(word, currentGuess, data, currentGuess);
         }
         else{
             notWinner(start, end, wordGrid, data);
@@ -202,6 +212,7 @@ async function sendWord(word, start, end, currentState,canType){
     else{}
 }
 
+//This function handles saving the states to the users local browser storage
 function setStates(word, currentGuess, response, index){
     console.log(currentState)
     currentState.guesses[currentGuess-1] = word;
@@ -210,6 +221,40 @@ function setStates(word, currentGuess, response, index){
     currentState.currentIndex = wordStart[currentGuess];
     localStorage.setItem('gameState', JSON.stringify(currentState));
 }
+
+//Sets the users stats when they guess correct
+function setStats(){
+    switch(currentGuess){
+        case 0: 
+            currentStat.one += 1;
+            currentStat.winStreak += 1;
+            break;
+        case 1:
+            currentStat.two += 1;
+            currentStat.winStreak += 1;
+            break;
+        case 2:
+            currentStat.three += 1;
+            currentStat.winStreak += 1;
+            break;
+        case 3:
+            currentStat.four += 1;
+            currentStat.winStreak += 1;
+            break;
+        case 4:
+            currentStat.five += 1;
+            currentStat.winStreak += 1;
+            break;
+        case 5:
+            currentStat.six += 1;
+            currentStat.winStreak += 1;
+            break;
+    }
+    localStorage.setItem("gameStats", JSON.stringify(currentStat));
+
+}
+
+//This is used if the user guesses the word correctly
 function winner(start, end, wordGrid, data){
     setColour(start, end, wordGrid, data);
     console.log("Winner!");
@@ -218,11 +263,11 @@ function winner(start, end, wordGrid, data){
     win.style.display = "flex";
     winButt.addEventListener("click", () => {
         win.style.display = "none";
-        console.log("your mums fat");
     });
     return canType=false;
 }
 
+//This is used if the word is valid but not correct
 function notWinner (start, end, wordGrid, data){
     console.log(data.length);
     setColour(start, end, wordGrid, data);
@@ -230,6 +275,7 @@ function notWinner (start, end, wordGrid, data){
     console.log("word checked");
 }
 
+//This is used if word is not a word in the list
 function notAWord(){
     console.log("word is not in list");
     let notif = document.querySelector(".notif");
