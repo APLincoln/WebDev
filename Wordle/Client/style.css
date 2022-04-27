@@ -221,3 +221,50 @@ button{
     margin: auto;
     text-align: center;
 }
+
+.winnerModal{
+    display: none;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1;
+    position: absolute;
+    border-radius: 30px;
+    opacity: 90%;
+    background-color: var(--border-primary);
+    width: 40%;
+    height: 60%;
+}
+
+.notif{
+    display:block;
+    opacity: 0;
+    width: 20%;
+    height: 10%;
+    background-color: salmon;
+    font-size: 50px;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    position: fixed;
+    border-radius: 20px;
+    text-align: center;
+    top:30%;
+    transition: opacity 1s ease-in-out;
+}
+
+.fade-in{
+    opacity: 1;
+}
+
+.fade-out{
+    opacity: 0;
+}
+
+.closeModal{
+    background-color: white;
+    border-radius: 5px;
+    max-height: 10%;
+    align-items: center;
+
+}

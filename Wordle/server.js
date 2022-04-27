@@ -18,9 +18,12 @@ app.listen(8080);
 
 let words = []
 wordFile.forEach(element => {words.push(element.toUpperCase());});
-let word = wordOfDay(words);
+let today = (Math.floor(Date.now()/1000/60/60/24));
+let word = wordOfDay(words, today);
 let ans = [0,0,0,0,0];
 let guess = ["","","","",""];
+
+
 
 //Handles the initial request to the server and serves the index page
 app.get("/", (req, res) => {
@@ -71,8 +74,8 @@ function wordChecker(guess, word, ans){
 
 //This sets the word of the day by working out the day from unix milliseconds
 //The remainder from dividing the day by list length gives the days index
-function wordOfDay(words){
-  let word = words[((Math.floor(Date.now()/1000/60/60/24))%words.length)].toUpperCase();
+function wordOfDay(words, today){
+  let word = words[(today%words.length)].toUpperCase();
   console.log(word);
   return word;
 }
@@ -85,3 +88,14 @@ function concatGuess(guess){
   }
   return concatWord;
 }
+
+//This checks to see if the day has changed every second
+//If the day has changed then it will reset the day value and will reset the word of the day
+setInterval(() => {
+  var newDate = (Math.floor(Date.now()/1000/60/60/24));
+  if (today < newDate){
+    today = newDate;
+    word = wordOfDay(words, today);
+    console.log(word);
+    return word, today;
+  }}, 1000);
