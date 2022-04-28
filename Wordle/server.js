@@ -8,17 +8,20 @@ import { stringify } from 'querystring';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
+//This serves the client folder
 const app = express();
 app.use(express.static('Client'));
 app.use(cors({origin: "http://localhost:8080/"}))
 app.listen(8080);
 
+//These are my global values
 let words = []
 wordFile.forEach(element => {words.push(element.toUpperCase());});
-let today = (Math.floor(Date.now()/1000/60/60/24));
+let today = getToday();
 let word = wordOfDay(words, today);
 let ans = [0,0,0,0,0];
 let guess = ["","","","",""];
+let intervalTime = (86400000 - (Date.now()%86400000));
 
 
 //Handles the request for the guess to be checked and returns the response
@@ -63,6 +66,13 @@ function wordChecker(guess, word, ans){
     }
   }
 
+
+//gets today from unix millisecods
+function getToday (){
+  return (Math.floor(Date.now()/1000/60/60/24));
+}
+
+
 //This sets the word of the day by working out the day from unix milliseconds
 //The remainder from dividing the day by list length gives the days index
 function wordOfDay(words, today){
@@ -80,13 +90,16 @@ function concatGuess(guess){
   return concatWord;
 }
 
-//This checks to see if the day has changed every second
-//If the day has changed then it will reset the day value and will reset the word of the day
-setInterval(() => {
-  var newDate = (Math.floor(Date.now()/1000/60/60/24));
-  if (today < newDate){
-    today = newDate;
+
+//This function sets the word at midnight every night
+//It is called once and then is called recursively
+function wordTimer(interval){
+  setTimeout(() => {
+    var timer = (86400000 - (Date.now()%86400000));
+    today = getToday();
     word = wordOfDay(words, today);
-    console.log(word);
-    return word, today;
-  }}, 1000);
+    console.log(timer, Date.now());
+    wordTimer(timer);
+  }, interval);
+}
+wordTimer(intervalTime);
