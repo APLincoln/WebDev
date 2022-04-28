@@ -260,9 +260,8 @@ function setStats(){
 function winner(start, end, wordGrid, data){
     setColour(start, end, wordGrid, data);
     console.log("Winner!");
-    let win = document.querySelector(".winnerModal");
-    let winButt = document.querySelector(".closeModal");
-    win.style.display = "flex";
+    setMain("none");
+    setStats("flex");
     winButt.addEventListener("click", () => {
         win.style.display = "none";
     });
@@ -293,7 +292,17 @@ function notAWord(){
 
 
 //Hide word grid/keyboard
+function setMain (render){
+    let grid = document.querySelector(".word-grid");
+    let keyboard = document.querySelector(".key-board");
+    grid.style.display = render;
+    keyboard.style.display = render;
+}
 
+function setStats (render){
+    let stats = document.querySelector(".stats");
+    stats.style.display = render;
+}
 //set main style align iten center and justify content center
 
 //amend
