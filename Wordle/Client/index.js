@@ -24,13 +24,14 @@ const gameState = {
     guesses : ["","","","","",""],
     responses : [],
     currentIndex: 0,
-    currentGuess: 0
+    currentGuess: 0,
+    date: (Math.floor(Date.now()/1000/60/60/24))
 }
 
 window.addEventListener('load', () => {
     localStorageInit();
-    currentStat = window.JSON.parse(localStorage.getItem('gameStats'));
     currentState = window.JSON.parse(localStorage.getItem('gameState'));
+    currentStat = window.JSON.parse(localStorage.getItem('gameStats'));
     resumeGame(currentState);
 })
 
@@ -39,7 +40,8 @@ function localStorageInit(){
     if (localStorage.getItem('gameStats') === null){
         localStorage.setItem('gameStats', JSON.stringify(gameStats))
     }
-    if (localStorage.getItem('gameState') === null){
+    state = window.JSON.parse(localStorage.getItem('gameState'));
+    if (state === null || state.date < (Math.floor(Date.now()/1000/60/60/24))){
         localStorage.setItem('gameState', JSON.stringify(gameState))
     }
 
@@ -288,3 +290,10 @@ function notAWord(){
     }, 1200);
     return;
 }
+
+
+//Hide word grid/keyboard
+
+//set main style align iten center and justify content center
+
+//amend

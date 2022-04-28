@@ -8,9 +8,6 @@ import { stringify } from 'querystring';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
 const app = express();
 app.use(express.static('Client'));
 app.use(cors({origin: "http://localhost:8080/"}))
@@ -23,12 +20,6 @@ let word = wordOfDay(words, today);
 let ans = [0,0,0,0,0];
 let guess = ["","","","",""];
 
-
-
-//Handles the initial request to the server and serves the index page
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, 'Client/index.html'));
-});
 
 //Handles the request for the guess to be checked and returns the response
 app.post('/wordCheck', express.json(), (req, res) => {
