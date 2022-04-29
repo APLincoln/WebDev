@@ -103,3 +103,5 @@ function wordTimer(interval){
   }, interval);
 }
 wordTimer(intervalTime);
+
+console.log((86400000 - (Date.now()%86400000)))
