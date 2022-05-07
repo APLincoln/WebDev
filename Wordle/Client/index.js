@@ -49,7 +49,6 @@ enter.addEventListener('click', (event) => {
         let start = wordStart[currentGuess];
         let end = wordEnd[currentGuess];
         let guessArr = getWord(wordStart[currentGuess], wordEnd[currentGuess], wordGrid);
-        console.log(currentGuess);
         sendWord(guessArr, start, end, wordGrid);
     }
     else {console.log("This is not a full word please try again");}
@@ -77,7 +76,6 @@ window.addEventListener('load', () => {
     currentState = window.JSON.parse(localStorage.getItem('gameState'));
     currentStat = window.JSON.parse(localStorage.getItem('gameStats'));
     resumeGame(currentState);
-    console.log(currentStat);
 })
 
 //This adds event listeners to all of the keys
@@ -107,7 +105,6 @@ function resumeGame(state){
             for(let k = 0, j = 5*i; j<(wordEnd[i]+1); j++, k++){
                 wordGrid.children[j].textContent = state.guesses[i][k];
          }
-         console.log(state.responses[i])
          setColour(wordStart[i], wordEnd[i], wordGrid, state.responses[i]);
         }
     }
@@ -162,7 +159,6 @@ window.onkeydown = function(event){
                 let start = wordStart[currentGuess];
                 let end = wordEnd[currentGuess];
                 let guessArr = getWord(wordStart[currentGuess], wordEnd[currentGuess], wordGrid);
-                console.log(currentGuess);
                 sendWord(guessArr, start, end, currentState, canType);
             }
             else {console.log("This is not a full word please try again");}
@@ -202,9 +198,7 @@ function setColour(start, end, wordGrid, letterPos){
 
 //This function sends word to the server and returns the response
 async function sendWord(word, start, end, currentState,canType){
-    console.log(word);
     const payload = { guess: word };
-    console.log(payload);
     const response = await fetch( 'http://localhost:8080/wordCheck' , {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -214,7 +208,6 @@ async function sendWord(word, start, end, currentState,canType){
     if(response.ok){
         data = await response.json();
         const count = data.filter(obj => obj == 2).length;
-        console.log(count);
         if(data.length<1){
             notAWord();
         }
@@ -243,11 +236,9 @@ async function sendWord(word, start, end, currentState,canType){
 }
 
 function setKeyColour(guess, response){
-    console.log(guess[0].toLowerCase(), response);
     for(let i = 0; i<guess.length; i++){
         let letter =  guess[i].toLowerCase();
         let key = document.getElementById(letter);
-        console.log(letter, key);
         switch(response[i]){
             case 0: key.classList.add("grey-key"); break;
             case 1: key.classList.add("orange-key"); break;
@@ -258,7 +249,6 @@ function setKeyColour(guess, response){
 
 //This function handles saving the states to the users local browser storage
 function setStates(word, currentGuess, response, index){
-    console.log(currentState)
     currentState.guesses[currentGuess-1] = word;
     currentState.currentGuess = currentGuess;
     currentState.responses.push(data);
@@ -313,7 +303,6 @@ function winner(start, end, wordGrid, data){
 
 //This is used if the word is valid but not correct
 function notWinner (start, end, wordGrid, data){
-    console.log(data.length);
     setColour(start, end, wordGrid, data);
     currentGuess ++;
     console.log("word checked");
