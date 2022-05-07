@@ -76,6 +76,7 @@ window.addEventListener('load', () => {
     currentState = window.JSON.parse(localStorage.getItem('gameState'));
     currentStat = window.JSON.parse(localStorage.getItem('gameStats'));
     resumeGame(currentState);
+    wordGrid.children[charIndex].classList.add('selected-box');
 })
 
 //This adds event listeners to all of the keys
@@ -152,7 +153,9 @@ window.onkeydown = function(event){
                 console.log("please check word");
                 break;}
             wordGrid.children[charIndex].textContent = event.key.toUpperCase();
+            wordGrid.children[charIndex].classList.remove('selected-box');
             charIndex += 1;
+            wordGrid.children[charIndex].classList.add('selected-box');
             break;
         case "check":
             if(charIndex > wordEnd[currentGuess]){
@@ -165,7 +168,9 @@ window.onkeydown = function(event){
             break;
         case "back":
             if(charIndex != wordStart[currentGuess]){
-                charIndex --
+                wordGrid.children[charIndex].classList.remove('selected-box');
+                charIndex --;
+                wordGrid.children[charIndex].classList.add('selected-box');
                 wordGrid.children[charIndex].textContent = "";
             }
             break;
@@ -341,14 +346,7 @@ function setStatsPage (render){
     let winStr = document.getElementById("winStreak");
     var statValues = Object.values(currentStat);
     winStr.textContent = currentStat.winStreak;
-    let winPer = document.getElementById("winPercentage");
-    let maxPercent = currentStat.wins+currentStat.loses;
-    if(currentStat.loses!=0 && currentStat.wins != currentStat.loses){
-        let percentage = (Math.floor((((currentStat.wins/maxPercent)*100))).toString() + "%");
-        winPer.textContent = percentage;
-    }
-    else if(currentStat.wins == currentStat.loses){winPer.textContent = "50%"}
-    else{winPer.textContent = "100%";}
+    winPercentage();
     let statsBars = document.querySelector(".statsContainer");
     let maxGuess = 0;
     var statValues = Object.values(currentStat);
@@ -365,6 +363,17 @@ function setStatsPage (render){
     }
     stats.style.display = render;
 }
+
+function winPercentage(){
+    let winPer = document.getElementById("winPercentage");
+    let maxPercent = currentStat.wins+currentStat.loses;
+    console.log(maxPercent)
+    if (maxPercent!=0){
+    let percentage = (Math.floor((((currentStat.wins/maxPercent)*100))).toString() + "%");
+    winPer.textContent = percentage;
+    }
+}
+
 //Renders home page
 function homePage() {
     setGrid("grid");
