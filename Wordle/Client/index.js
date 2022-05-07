@@ -1,12 +1,11 @@
+//Imports
 
+//Global variables
 let key = document.querySelectorAll('.key');
 let charIndex = 0; //This is the index for the div that you are typing in
 let currentGuess = 0; // This is the current work to be checked // list of checked words. 0=not checked 1=checked
 const wordStart = [0,5,10,15,20,25];
 const wordEnd = [4,9,14,19,24,29];
-let wordGrid = document.getElementById('word_grid');
-let enter = document.querySelector('.enter'); //Used for the on-screen keyboard
-let back = document.querySelector('.return'); //Used for the on-scree keyboard
 let canType = true; //This boolean is set so the user is allowed to type into the boxes
 let currentState = null;
 let currentStat = null;
@@ -18,22 +17,75 @@ const gameStats = {
     four: 0,
     five: 0,
     six: 0,
+    wins: 0,
+    loses: 0,
     winStreak: 0
+
 }
 const gameState = {
     guesses : ["","","","","",""],
     responses : [],
     currentIndex: 0,
     currentGuess: 0,
-    date: (Math.floor(Date.now()/1000/60/60/24))
+    date: (Math.floor(Date.now()/1000/60/60/24)),
+    winStatus: false
 }
+
+//Global page elements
+
+const wordGrid = document.getElementById('word_grid');
+const enter = document.querySelector('.enter'); //Used for the on-screen keyboard
+const back = document.querySelector('.return'); //Used for the on-scree keyboard
+const closeModal = document.querySelector('.closeModal');
+const statsButton = document.getElementById('statsButton');
+const homeButton = document.getElementById('homeButton');
+
+//Event listeners
+
+//This adds event listener to enter
+enter.addEventListener('click', (event) => {
+    if(canType){
+    if(charIndex > wordEnd[currentGuess]){
+        let start = wordStart[currentGuess];
+        let end = wordEnd[currentGuess];
+        let guessArr = getWord(wordStart[currentGuess], wordEnd[currentGuess], wordGrid);
+        console.log(currentGuess);
+        sendWord(guessArr, start, end, wordGrid);
+    }
+    else {console.log("This is not a full word please try again");}
+}})
+
+statsButton.addEventListener('click', () => {statsPage();});
+
+homeButton.addEventListener('click', () => {homePage();});
+
+// This adds event listener to backspace
+back.addEventListener('click', (event) => {
+    if(canType){
+    if(charIndex != wordStart[currentGuess]){
+        charIndex --
+        wordGrid.children[charIndex].textContent = "";
+    }
+}})
+
+closeModal.addEventListener('click', () => {
+    homePage();
+})
 
 window.addEventListener('load', () => {
     localStorageInit();
     currentState = window.JSON.parse(localStorage.getItem('gameState'));
     currentStat = window.JSON.parse(localStorage.getItem('gameStats'));
     resumeGame(currentState);
+    console.log(currentStat);
 })
+
+//This adds event listeners to all of the keys
+for(let i = 0; i<key.length; i++){
+    key[i].addEventListener('click', keyInput)
+}
+
+//Functions
 
 //This function checks the local storage is initialized and then adds fields that need adding.
 function localStorageInit(){
@@ -50,10 +102,8 @@ function localStorageInit(){
 //Returs the game to the state it was when the user left
 function resumeGame(state){
     for(let i = 0; i<state.guesses.length; i++){
-        //console.log(state.guesses[i])
-        //debugger;
         if(state.guesses[i] != ""){
-            //debugger;
+            setKeyColour(state.guesses[i], state.responses[i])
             for(let k = 0, j = 5*i; j<(wordEnd[i]+1); j++, k++){
                 wordGrid.children[j].textContent = state.guesses[i][k];
          }
@@ -63,34 +113,8 @@ function resumeGame(state){
     }
     charIndex = state.currentIndex
     currentGuess  = state.currentGuess
+    canType = !state.winStatus
 }
-
-//This adds event listeners to all of the keys
-for(let i = 0; i<key.length; i++){
-    key[i].addEventListener('click', keyInput)
-}
-
-//This adds event listener to enter
-enter.addEventListener('click', (event) => {
-    if(canType){
-    if(charIndex > wordEnd[currentGuess]){
-        let start = wordStart[currentGuess];
-        let end = wordEnd[currentGuess];
-        let guessArr = getWord(wordStart[currentGuess], wordEnd[currentGuess], wordGrid);
-        console.log(currentGuess);
-        sendWord(guessArr, start, end, wordGrid);
-    }
-    else {console.log("This is not a full word please try again");}
-}})
-
-// This adds event listener to backspace
-back.addEventListener('click', (event) => {
-    if(canType){
-    if(charIndex != wordStart[currentGuess]){
-        charIndex --
-        wordGrid.children[charIndex].textContent = "";
-    }
-}})
 
 //This changes text content based on key pressed on screen
 function keyInput(event){
@@ -106,7 +130,6 @@ function keyInput(event){
 
 //This checks an input and returns a string for the switch case
 function validKey(a){
-    //debugger;
     if (a>=65 && a<91){return "letter";}
     else if (a == 13){return "check";}
     else if (a == 8){return "back";}
@@ -196,22 +219,41 @@ async function sendWord(word, start, end, currentState,canType){
             notAWord();
         }
         else if(count == 5){
-            setStates(word, currentGuess+1, data, currentGuess);
-            setStats();
+            setStats(0);
+            setKeyColour(word, data);
             winner(start, end, wordGrid, data);
+            setStates(word, currentGuess+1, data, currentGuess);
         }
         else if (currentGuess == 5){
             currentStat.winStreak = 0;
+            currentStat.loses = currentStat.loses + 1;
             localStorage.setItem("gameStats",JSON.stringify(currentStat));
             notWinner(start, end, wordGrid, data);
             setStates(word, currentGuess, data, currentGuess);
+            canType = false;
+            statsPage();
         }
         else{
             notWinner(start, end, wordGrid, data);
-            setStates(word, currentGuess, data, currentGuess)
+            setKeyColour(word, data);
+            setStates(word, currentGuess, data, currentGuess);
         }
     }
     else{}
+}
+
+function setKeyColour(guess, response){
+    console.log(guess[0].toLowerCase(), response);
+    for(let i = 0; i<guess.length; i++){
+        let letter =  guess[i].toLowerCase();
+        let key = document.getElementById(letter);
+        console.log(letter, key);
+        switch(response[i]){
+            case 0: key.classList.add("grey-key"); break;
+            case 1: key.classList.add("orange-key"); break;
+            case 2: key.classList.add("green-key"); break;
+        }
+    }
 }
 
 //This function handles saving the states to the users local browser storage
@@ -227,7 +269,7 @@ function setStates(word, currentGuess, response, index){
 //Sets the users stats when they guess correct
 function setStats(){
     switch(currentGuess){
-        case 0: 
+        case 0:
             currentStat.one += 1;
             currentStat.winStreak += 1;
             break;
@@ -238,6 +280,7 @@ function setStats(){
         case 2:
             currentStat.three += 1;
             currentStat.winStreak += 1;
+
             break;
         case 3:
             currentStat.four += 1;
@@ -252,19 +295,19 @@ function setStats(){
             currentStat.winStreak += 1;
             break;
     }
-    localStorage.setItem("gameStats", JSON.stringify(currentStat));
-
+    localStorage.setItem('gameStats', JSON.stringify(currentStat));
 }
 
 //This is used if the user guesses the word correctly
 function winner(start, end, wordGrid, data){
     setColour(start, end, wordGrid, data);
     console.log("Winner!");
-    setMain("none");
-    setStats("flex");
-    winButt.addEventListener("click", () => {
-        win.style.display = "none";
-    });
+    statsPage();
+    let wins = currentStat.wins + 1
+    currentState.winStatus = true;
+    currentStat.wins = wins;
+    localStorage.setItem('gameState', JSON.stringify(currentState))
+    localStorage.setItem('gameStats', JSON.stringify(currentStat))
     return canType=false;
 }
 
@@ -291,18 +334,57 @@ function notAWord(){
 }
 
 
-//Hide word grid/keyboard
-function setMain (render){
+//Renders the word grid
+function setGrid (render){
     let grid = document.querySelector(".word-grid");
-    let keyboard = document.querySelector(".key-board");
     grid.style.display = render;
+}
+
+//Renders the keyboard
+function setKeyboard (render) {
+    let keyboard = document.querySelector(".key-board");
     keyboard.style.display = render;
 }
 
-function setStats (render){
+//Renders stats page
+function setStatsPage (render){
     let stats = document.querySelector(".stats");
+    let winStr = document.getElementById("winStreak");
+    var statValues = Object.values(currentStat);
+    winStr.textContent = currentStat.winStreak;
+    let winPer = document.getElementById("winPercentage");
+    let maxPercent = currentStat.wins+currentStat.loses;
+    if(currentStat.loses!=0 && currentStat.wins != currentStat.loses){
+        let percentage = (Math.floor((((currentStat.wins/maxPercent)*100))).toString() + "%");
+        winPer.textContent = percentage;
+    }
+    else if(currentStat.wins == currentStat.loses){winPer.textContent = "50%"}
+    else{winPer.textContent = "100%";}
+    let statsBars = document.querySelector(".statsContainer");
+    let maxGuess = 0;
+    var statValues = Object.values(currentStat);
+    for (let i = 0; i<statsBars.children.length; i++){
+        if(statValues[i]>maxGuess){maxGuess = statValues[i]}
+    }
+    var maxBarLength = 100/maxGuess;
+    for(let i = 0; i<statsBars.children.length; i++){
+        statsBars.children[i].children[1].textContent = statValues[i]
+        if (statValues[i]>0){
+            statsBars.children[i].children[1].textContent = statValues[i]
+            statsBars.children[i].children[1].style.width = ((statValues[i])*maxBarLength).toString() + "%";
+        }
+    }
     stats.style.display = render;
 }
-//set main style align iten center and justify content center
-
-//amend
+//Renders home page
+function homePage() {
+    setGrid("grid");
+    setKeyboard("flex");
+    setStatsPage("none");
+}
+//Renders stats page
+function statsPage(){
+    setGrid("none");
+    setKeyboard("none");
+    setStatsPage("flex");
+}
