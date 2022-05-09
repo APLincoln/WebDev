@@ -155,7 +155,9 @@ window.onkeydown = function(event){
             wordGrid.children[charIndex].textContent = event.key.toUpperCase();
             wordGrid.children[charIndex].classList.remove('selected-box');
             charIndex += 1;
-            wordGrid.children[charIndex].classList.add('selected-box');
+            if(charIndex < wordGrid.children.length){
+                wordGrid.children[charIndex].classList.add('selected-box');
+            }
             break;
         case "check":
             if(charIndex > wordEnd[currentGuess]){
@@ -168,7 +170,9 @@ window.onkeydown = function(event){
             break;
         case "back":
             if(charIndex != wordStart[currentGuess]){
-                wordGrid.children[charIndex].classList.remove('selected-box');
+                if(charIndex <= wordEnd[currentGuess]){
+                    wordGrid.children[charIndex].classList.remove('selected-box');
+                }
                 charIndex --;
                 wordGrid.children[charIndex].classList.add('selected-box');
                 wordGrid.children[charIndex].textContent = "";
