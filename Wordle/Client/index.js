@@ -188,13 +188,17 @@ function setColour(start, end, wordGrid, letterPos){
         switch (letterPos[i]){
             case 2:
                 wordGrid.children[start].classList.add("green-box");
+                wordGrid.children[start].classList.add("letter-box-flip");
                 start++;
                 break;
             case 1:
                 wordGrid.children[start].classList.add("orange-box");
+                wordGrid.children[start].classList.add("letter-box-flip");
                 start++;
                 break;
             default:
+                wordGrid.children[start].classList.add("content-flip");
+                wordGrid.children[start].classList.add("letter-box-flip");
                 start++;
                 break;
         }
@@ -215,6 +219,14 @@ async function sendWord(word, start, end, currentState,canType){
         const count = data.filter(obj => obj == 2).length;
         if(data.length<1){
             notAWord();
+            for(let i = wordStart[currentGuess]; i<=wordEnd[currentGuess]; i++){
+                wordGrid.children[i].classList.add("wrong-shake");
+            }
+            setTimeout(() => {
+                for(let i = wordStart[currentGuess]; i<=wordEnd[currentGuess]; i++){
+                    wordGrid.children[i].classList.remove("wrong-shake")
+                }
+            }, 1000);
         }
         else if(count == 5){
             setStats(0);
@@ -324,7 +336,6 @@ function notAWord(){
         notif.classList.remove("fade-in");
         notif.className += " fade-out"
     }, 1200);
-    return;
 }
 
 

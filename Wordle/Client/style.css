@@ -73,7 +73,30 @@ main{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 200%;
 }
+.letter-box-flip{
+    transform-style: preserve-3d;
+    transition: all 1.0s linear;
+    transform: rotateX(360deg);
+}
 
+.wrong-shake{
+    animation: shake .82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+}
+@keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
 .selected-box{
     border-width: 4px;
     border-color: black;
@@ -294,11 +317,11 @@ button.flex-ele:hover{
     border-radius: 20px;
     text-align: center;
     top:30%;
-    transition: opacity 1s ease-in-out;
+    transition: .5s ease-in-out;
 }
 
 .fade-in{
-    opacity: 1;
+    opacity: .8;
 }
 
 .fade-out{
