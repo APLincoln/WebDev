@@ -13,7 +13,7 @@ const __dirname = dirname(__filename);
 
 const app = express();
 app.use(express.static('Client'));
-app.use(cors({origin: "http://localhost:8080/"}))
+//app.use(cors({origin: "http://localhost:8080/"}))
 app.listen(8080);
 
 let words = []
