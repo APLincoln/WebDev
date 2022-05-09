@@ -11,7 +11,7 @@ import { dirname } from 'path';
 //This serves the client folder
 const app = express();
 app.use(express.static('Client'));
-app.use(cors({origin: "http://localhost:8080/"}))
+//app.use(cors({origin: "http://localhost:8080/"}))
 app.listen(8080);
 
 //These are my global values
