@@ -208,7 +208,7 @@ function setColour(start, end, wordGrid, letterPos){
 //This function sends word to the server and returns the response
 async function sendWord(word, start, end, currentState,canType){
     const payload = { guess: word };
-    const response = await fetch( 'http://localhost:8080/wordCheck' , {
+    const response = await fetch( '/wordCheck' , {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(payload),
