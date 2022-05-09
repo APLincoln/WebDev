@@ -111,8 +111,6 @@ main{
     display: flex;
     flex-direction: column;
     margin-top: 2rem;
-    width: 35%;
-    height: 23vh;
 }
 
 .key-row{
@@ -129,6 +127,8 @@ main{
     justify-content: center;
     align-items: center;
     font-weight: bold;
+    min-height: 4em;
+    aspect-ratio: .7;
     color: var(--text-primary);
     border-radius: 15%;
     border-width: 0;
@@ -372,6 +372,9 @@ button.flex-ele:hover{
     .key-board{
         margin-top: 2rem;
         width: 100%;
+    }
+    .key{
+        aspect-ratio: 0;
     }
     .notif {
         width: 80%;
