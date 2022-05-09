@@ -76,7 +76,9 @@ window.addEventListener('load', () => {
     currentState = window.JSON.parse(localStorage.getItem('gameState'));
     currentStat = window.JSON.parse(localStorage.getItem('gameStats'));
     resumeGame(currentState);
-    wordGrid.children[charIndex].classList.add('selected-box');
+    if(charIndex<wordGrid.children.length){
+        wordGrid.children[charIndex].classList.add('selected-box');
+    }
 })
 
 //This adds event listeners to all of the keys
