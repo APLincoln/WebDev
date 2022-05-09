@@ -53,8 +53,9 @@ main{
 .word-grid{
     display: grid;
     margin-top: 2rem;
-    width: 25%;
-    height: 55vh;
+    margin: 0, auto;
+    max-width: 50%;
+    max-height: 55vh;
     padding: 5px;
     grid-template-rows: repeat(6, 1fr);
     grid-template-columns: repeat(5, 1fr);
@@ -65,13 +66,16 @@ main{
     display: flex;
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.25);
     background: white;
+    aspect-ratio: 1;
     justify-content: center;
     align-items: center;
     color: var(--text-primary);
     border-radius: 25%;
     font-weight: bold;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 200%;
+    font-size: 1em;
+    min-width: 4em;
+
 }
 .letter-box-flip{
     transform-style: preserve-3d;
@@ -361,6 +365,9 @@ button.flex-ele:hover{
         max-width: 90%;
         min-width: 80%;
         height: 50vh;
+    }
+    .letter-box{
+        min-width: 0;
     }
     .key-board{
         margin-top: 2rem;
