@@ -62,7 +62,11 @@ homeButton.addEventListener('click', () => {homePage();});
 back.addEventListener('click', (event) => {
     if(canType){
     if(charIndex != wordStart[currentGuess]){
-        charIndex --
+        if(charIndex <= wordEnd[currentGuess]){
+            wordGrid.children[charIndex].classList.remove('selected-box');
+        }
+        charIndex --;
+        wordGrid.children[charIndex].classList.add('selected-box');
         wordGrid.children[charIndex].textContent = "";
     }
 }})
@@ -76,7 +80,7 @@ window.addEventListener('load', () => {
     currentState = window.JSON.parse(localStorage.getItem('gameState'));
     currentStat = window.JSON.parse(localStorage.getItem('gameStats'));
     resumeGame(currentState);
-    if(charIndex<wordGrid.children.length){
+    if(charIndex<wordGrid.children.length && currentState.winStatus == false){
         wordGrid.children[charIndex].classList.add('selected-box');
     }
 })
@@ -125,7 +129,11 @@ function keyInput(event){
         return;
     }
     wordGrid.children[charIndex].textContent = char.toUpperCase();
+    wordGrid.children[charIndex].classList.remove('selected-box');
     charIndex += 1;
+    if(charIndex <= wordEnd[currentGuess]){
+        wordGrid.children[charIndex].classList.add('selected-box');
+    }
 }}
 
 //This checks an input and returns a string for the switch case
@@ -157,7 +165,7 @@ window.onkeydown = function(event){
             wordGrid.children[charIndex].textContent = event.key.toUpperCase();
             wordGrid.children[charIndex].classList.remove('selected-box');
             charIndex += 1;
-            if(charIndex < wordGrid.children.length){
+            if(charIndex <= wordEnd[currentGuess]){
                 wordGrid.children[charIndex].classList.add('selected-box');
             }
             break;
@@ -329,6 +337,7 @@ function notWinner (start, end, wordGrid, data){
     setColour(start, end, wordGrid, data);
     currentGuess ++;
     console.log("word checked");
+    wordGrid.children[charIndex].classList.add('selected-box');
 }
 
 //This is used if word is not a word in the list
