@@ -378,6 +378,9 @@ button.flex-ele:hover{
         width: 90%;
         height: 80%;
     }
+    .line-container{
+        height: 2rem;
+    }
 }
 
 @media only screen and (min-width:600px){
