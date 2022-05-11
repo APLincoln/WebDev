@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import wordFile from './words.js';
+import * as db from './wordService.js';
 //This is the import of the guess handler
 import * as gh from './guessHandler.js';
 import { stringify } from 'querystring';
