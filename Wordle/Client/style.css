@@ -379,7 +379,10 @@ button.flex-ele:hover{
         height: 80%;
     }
     .line-container{
-        height: 2rem;
+        height: 1rem;
+    }
+    .statsContainer{
+        height: 40%;
     }
 }
 
