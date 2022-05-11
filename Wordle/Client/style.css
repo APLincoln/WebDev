@@ -283,7 +283,7 @@ button.flex-ele:hover{
 
 .bar{
     display: flex;
-    height: 100%;
+    max-height: 100%;
     width: 1.2rem;
     background-color: #242424;
     align-items: center;
@@ -330,7 +330,10 @@ button.flex-ele:hover{
     background-color: white;
     border-radius: 5px;
     max-height: 10%;
+    width: 5rem;
     align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0);
 
 }
 .winContainer{
@@ -377,9 +380,11 @@ button.flex-ele:hover{
     .stats{
         width: 90%;
         height: 80%;
+        font-size: 1rem;
     }
     .line-container{
         height: 1rem;
+        font-size: 1rem;
     }
     .statsContainer{
         height: 40%;

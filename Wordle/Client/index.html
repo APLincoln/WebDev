@@ -14,136 +14,142 @@
 
 
 <body>
-        <div class="header">  
-            <button id="homeButton" class="flex-ele">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-            </button>
-            <div>Wordle</div>
-            <button class="flex-ele" id="statsButton">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-            </button>  
+    <div class="header">
+        <button id="homeButton" class="flex-ele">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="1">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+        </button>
+        <div>Wordle</div>
+        <button class="flex-ele" id="statsButton">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="1">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+        </button>
+    </div>
+    <main>
+        <div class="stats">
+            <h1>Statistics</h1>
+            <div class="statsHeader">
+                <div class="winContainer">
+                    <div class="wins">Win streak</div>
+                    <div class="wins" id="winStreak"></div>
+                </div>
+                <div class="winContainer">
+                    <div class="wins">Win Percentage</div>
+                    <div class="wins" id="winPercentage">0%</div>
+                </div>
+            </div>
+            <div class="statsContainer">
+                <div class="lineContainer">
+                    <div class="guessNumber">1</div>
+                    <div class="bar">0</div>
+                </div>
+                <div class="lineContainer">
+                    <div class="guessNumber">2</div>
+                    <div class="bar">0</div>
+                </div>
+                <div class="lineContainer">
+                    <div class="guessNumber">3</div>
+                    <div class="bar">0</div>
+                </div>
+                <div class="lineContainer">
+                    <div class="guessNumber">4</div>
+                    <div class="bar">0</div>
+                </div>
+                <div class="lineContainer">
+                    <div class="guessNumber">5</div>
+                    <div class="bar">0</div>
+                </div>
+                <div class="lineContainer">
+                    <div class="guessNumber">6</div>
+                    <div class="bar">0</div>
+                </div>
+            </div>
+            <button class="closeModal">Home</button>
         </div>
-            <main>
-                <div class="stats">
-                    <h1>Statistics</h1>
-                    <div class="statsHeader">
-                        <div class="winContainer">
-                            <div class="wins">Win streak</div>
-                            <div class="wins" id="winStreak"></div>
-                        </div>
-                        <div class="winContainer">
-                            <div class="wins">Win Percentage</div>
-                            <div class="wins" id="winPercentage">0%</div>
-                        </div>
-                    </div>
-                    <div class="statsContainer">
-                        <div class="lineContainer">
-                            <div class="guessNumber">1</div>
-                            <div class="bar">0</div>
-                        </div>
-                        <div class="lineContainer">
-                            <div class="guessNumber">2</div>
-                            <div class="bar">0</div>
-                        </div>
-                        <div class="lineContainer">
-                            <div class="guessNumber">3</div>
-                            <div class="bar">0</div>
-                        </div>
-                        <div class="lineContainer">
-                            <div class="guessNumber">4</div>
-                            <div class="bar">0</div>
-                        </div>
-                        <div class="lineContainer">
-                            <div class="guessNumber">5</div>
-                            <div class="bar">0</div>
-                        </div>
-                        <div class="lineContainer">
-                            <div class="guessNumber">6</div>
-                            <div class="bar">0</div>
-                        </div>
-                    </div>
-                    <button class="closeModal">Close Modal</button>
-                </div>
-                <div class="notif"></div>
-                <div id="word_grid" class="word-grid">
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                    <div class="letter-box"></div>
-                </div>
-                <div class="key-board">
-                    <div class="key-row">
-                        <button class="key" id="q" data-key="q">q</button>
-                        <button class="key" id="w" data-key="w">w</button>
-                        <button class="key" id="e" data-key="e">e</button>
-                        <button class="key" id="r" data-key="r">r</button>
-                        <button class="key" id="t" data-key="t">t</button>
-                        <button class="key" id="y" data-key="y">y</button>
-                        <button class="key" id="u" data-key="u">u</button>
-                        <button class="key" id="i" data-key="i">i</button>
-                        <button class="key" id="o" data-key="o">o</button>
-                        <button class="key" id="p" data-key="p">p</button>
-                    </div>
-                    <div class="key-row">
-                        <div class="space-half"></div>
-                        <button class="key" id="a" data-key="a">a</button>
-                        <button class="key" id="s" data-key="s">s</button>
-                        <button class="key" id="d" data-key="d">d</button>
-                        <button class="key" id="f" data-key="f">f</button>
-                        <button class="key" id="g" data-key="g">g</button>
-                        <button class="key" id="h" data-key="h">h</button>
-                        <button class="key" id="j" data-key="j">j</button>
-                        <button class="key" id="k" data-key="k">k</button>
-                        <button class="key" id="l" data-key="l">l</button>
-                        <div class="space-half"></div>
-                    </div>
-                    <div class="key-row">
-                        <button class="enter" data-key="enter">enter</button>
-                        <button class="key" id="z" data-key="z">z</button>
-                        <button class="key" id="x" data-key="x">x</button>
-                        <button class="key" id="c" data-key="c">c</button>
-                        <button class="key" id="v" data-key="v">v</button>
-                        <button class="key" id="b" data-key="b">b</button>
-                        <button class="key" id="n" data-key="n">n</button>
-                        <button class="key" id="m" data-key="m">m</button>
-                        <button class="return" data-key="return">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </main>
+        <div class="notif"></div>
+        <div id="word_grid" class="word-grid">
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+            <div class="letter-box"></div>
+        </div>
+        <div class="key-board">
+            <div class="key-row">
+                <button class="key" id="q" data-key="q">q</button>
+                <button class="key" id="w" data-key="w">w</button>
+                <button class="key" id="e" data-key="e">e</button>
+                <button class="key" id="r" data-key="r">r</button>
+                <button class="key" id="t" data-key="t">t</button>
+                <button class="key" id="y" data-key="y">y</button>
+                <button class="key" id="u" data-key="u">u</button>
+                <button class="key" id="i" data-key="i">i</button>
+                <button class="key" id="o" data-key="o">o</button>
+                <button class="key" id="p" data-key="p">p</button>
+            </div>
+            <div class="key-row">
+                <div class="space-half"></div>
+                <button class="key" id="a" data-key="a">a</button>
+                <button class="key" id="s" data-key="s">s</button>
+                <button class="key" id="d" data-key="d">d</button>
+                <button class="key" id="f" data-key="f">f</button>
+                <button class="key" id="g" data-key="g">g</button>
+                <button class="key" id="h" data-key="h">h</button>
+                <button class="key" id="j" data-key="j">j</button>
+                <button class="key" id="k" data-key="k">k</button>
+                <button class="key" id="l" data-key="l">l</button>
+                <div class="space-half"></div>
+            </div>
+            <div class="key-row">
+                <button class="enter" data-key="enter">enter</button>
+                <button class="key" id="z" data-key="z">z</button>
+                <button class="key" id="x" data-key="x">x</button>
+                <button class="key" id="c" data-key="c">c</button>
+                <button class="key" id="v" data-key="v">v</button>
+                <button class="key" id="b" data-key="b">b</button>
+                <button class="key" id="n" data-key="n">n</button>
+                <button class="key" id="m" data-key="m">m</button>
+                <button class="return" data-key="return">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="1">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>
