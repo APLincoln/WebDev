@@ -365,8 +365,8 @@ button.flex-ele:hover{
     }
     .word-grid{
         margin-top: 0;
-        gap:.2em;
-        width:80%
+        gap:.3em;
+        width:75%
     }
     .letter-box{
         max-width:3.8em;  
