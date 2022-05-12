@@ -373,7 +373,7 @@ button.flex-ele:hover{
     .word-grid{
         margin-top: 0;
         gap:.3em;
-        width:75%
+        max-width:75%
     }
     .letter-box{
         max-width:3.8em;  
@@ -387,9 +387,15 @@ button.flex-ele:hover{
     }
     .key{
         font-size: 12px;
+        aspect-ration: 0;
+        height: 80%;
     }
     .enter{
         font-size: 12px;
+        height:80%;
+    }
+    .return{
+        height:80%;
     }
     .notif {
         width: 80%;
