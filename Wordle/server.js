@@ -1,13 +1,7 @@
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
-import wordFile from './words.js';
 import * as db from './wordService.js';
-//This is the import of the guess handler
-import * as gh from './guessHandler.js';
-import { stringify } from 'querystring';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
 //This serves the client folder
 const app = express();
@@ -16,31 +10,27 @@ app.use(express.static('Client'));
 app.listen(8080);
 
 //These are my global values
-let words = []
-wordFile.forEach(element => {words.push(element.toUpperCase());});
 let today = getToday();
-let word = wordOfDay(words, today);
+let word = await wordOfDay(today);
 let ans = [0,0,0,0,0];
 let guess = ["","","","",""];
 let intervalTime = (86400000 - (Date.now()%86400000));
 
 
 //Handles the request for the guess to be checked and returns the response
-app.post('/wordCheck', express.json(), (req, res) => {
-  let result = wordChecker(req.body.guess, word, ans);
+app.post('/wordCheck', express.json(), async (req, res) => {
+  let result = await wordChecker(req.body.guess, word, ans);
   res.setHeader('Content-Type', 'application/json');
-  console.log(result);
   res.send(result);
 });
 
 //This checks the guess against the word of the day
-function wordChecker(guess, word, ans){
+async function wordChecker(guess, word, ans){
     ans = [0,0,0,0,0];
     let wordOfDay = word.split("");
 
     //This is for the word does not exist in the list of words
-    if(words.includes(concatGuess(guess))){
-
+    if(await db.isWord(concatGuess(guess))){
     //first check for characters in correct position
       for(let i = 0; i<wordOfDay.length; i++){
         if(wordOfDay[i] == guess[i]){
@@ -76,9 +66,10 @@ function getToday (){
 
 //This sets the word of the day by working out the day from unix milliseconds
 //The remainder from dividing the day by list length gives the days index
-function wordOfDay(words, today){
-  let word = words[(today%words.length)].toUpperCase();
-  console.log(word);
+async function wordOfDay(today){
+  let words = await db.wordCount();
+  let currentWord = (today%words);
+  let word = await db.getWord(currentWord);
   return word;
 }
 
@@ -96,11 +87,13 @@ function concatGuess(guess){
 //It is called once and then is called recursively
 function wordTimer(interval){
   setTimeout(() => {
-    var timer = (86400000 - (Date.now()%86400000));
+    const timer = (86400000 - (Date.now()%86400000));
     today = getToday();
-    word = wordOfDay(words, today);
+    word = wordOfDay(today);
     console.log(timer, Date.now());
     wordTimer(timer);
   }, interval);
 }
 wordTimer(intervalTime);
+
+console.log(word, await db.wordCount())

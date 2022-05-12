@@ -1,1 +1,0 @@
-//This will be where the word of the day will be gathered and will also manage the guesses

@@ -1,5 +1,5 @@
 //Imports
-
+//import * as rm from "./renderManager.js";
 //Global variables
 let key = document.querySelectorAll('.key');
 let charIndex = 0; //This is the index for the div that you are typing in
@@ -54,9 +54,9 @@ enter.addEventListener('click', (event) => {
     else {console.log("This is not a full word please try again");}
 }})
 
-statsButton.addEventListener('click', () => {statsPage();});
+statsButton.addEventListener('click', (currentStat) => {statsPage(currentStat);});
 
-homeButton.addEventListener('click', () => {homePage();});
+homeButton.addEventListener('click', (currentStat) => {homePage(currentStat);});
 
 // This adds event listener to backspace
 back.addEventListener('click', (event) => {
@@ -72,7 +72,7 @@ back.addEventListener('click', (event) => {
 }})
 
 closeModal.addEventListener('click', () => {
-    homePage();
+    homePage(currentStat);
 })
 
 window.addEventListener('load', () => {
@@ -97,7 +97,7 @@ function localStorageInit(){
     if (localStorage.getItem('gameStats') === null){
         localStorage.setItem('gameStats', JSON.stringify(gameStats))
     }
-    state = window.JSON.parse(localStorage.getItem('gameState'));
+    let state = window.JSON.parse(localStorage.getItem('gameState'));
     if (state === null || state.date < (Math.floor(Date.now()/1000/60/60/24))){
         localStorage.setItem('gameState', JSON.stringify(gameState))
     }
@@ -146,7 +146,7 @@ function validKey(a){
 
 //This gets the word from the boxes on the word grid and returns as an array
 function getWord(start, end, wordGrid){
-    guessArr = ["","","","",""];
+    let guessArr = ["","","","",""];
     for(let i = 0; start<=end; i++){
         guessArr[i] = wordGrid.children[start].textContent;
             start++;
@@ -229,7 +229,7 @@ async function sendWord(word, start, end, currentState,canType){
     });
 
     if(response.ok){
-        data = await response.json();
+        let data = await response.json();
         const count = data.filter(obj => obj == 2).length;
         if(data.length<1){
             notAWord();
@@ -282,7 +282,7 @@ function setKeyColour(guess, response){
 function setStates(word, currentGuess, response, index){
     currentState.guesses[currentGuess-1] = word;
     currentState.currentGuess = currentGuess;
-    currentState.responses.push(data);
+    currentState.responses.push(response);
     currentState.currentIndex = wordStart[currentGuess];
     localStorage.setItem('gameState', JSON.stringify(currentState));
 }
@@ -393,7 +393,6 @@ function setStatsPage (render){
 function winPercentage(){
     let winPer = document.getElementById("winPercentage");
     let maxPercent = currentStat.wins+currentStat.loses;
-    console.log(maxPercent)
     if (maxPercent!=0){
     let percentage = (Math.floor((((currentStat.wins/maxPercent)*100))).toString() + "%");
     winPer.textContent = percentage;
