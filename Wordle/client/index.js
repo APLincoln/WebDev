@@ -256,7 +256,7 @@ async function sendWord(word, start, end, currentState,canType){
             notWinner(start, end, wordGrid, data);
             setStates(word, currentGuess, data, currentGuess);
             canType = false;
-            statsPage();
+            statsPage(currentStat);
         }
         else{
             notWinner(start, end, wordGrid, data);
@@ -324,7 +324,7 @@ function setStats(){
 function winner(start, end, wordGrid, data){
     setColour(start, end, wordGrid, data);
     console.log("Winner!");
-    statsPage();
+    statsPage(currentStat);
     let wins = currentStat.wins + 1
     currentState.winStatus = true;
     currentStat.wins = wins;

@@ -58,7 +58,8 @@ main{
     grid-template-rows: repeat(6, 1fr);
     grid-template-columns: repeat(5, 1fr);
     gap: 0.5rem;
-    width:50%;
+    width:45%;
+    max-height: 50%;
     max-width: 25em;
 }
 
@@ -263,6 +264,7 @@ button.flex-ele:hover{
     background-color: var(--border-primary);
     width: 100%;
     height: 60%;
+    font-weight: bold;
 }
 
 .statsContainer{

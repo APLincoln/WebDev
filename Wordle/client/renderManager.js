@@ -13,6 +13,7 @@ export function setKeyboard (render) {
 
 //Renders stats page
 export function setStatsPage (render, currentStat){
+  console.log(currentStat)
   let stats = document.querySelector(".stats");
   let winStr = document.getElementById("winStreak");
   let statValues = Object.values(currentStat);
