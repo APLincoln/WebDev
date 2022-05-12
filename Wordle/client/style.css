@@ -58,9 +58,7 @@ main{
     grid-template-rows: repeat(6, 1fr);
     grid-template-columns: repeat(5, 1fr);
     gap: 0.5rem;
-    width:45%;
-    max-height: 50%;
-    max-width: 25em;
+    height:40%;
 }
 
 .letter-box{
@@ -71,6 +69,7 @@ main{
     align-items: center;
     color: var(--text-primary);
     border-radius: 25%;
+    height:3em;
     aspect-ratio: 1;
     font-weight: bold;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -110,7 +109,8 @@ main{
 
 .key-board{
     display: flex;
-    width: 90%;
+    width: 70%;
+    max-width:30em;
     height: 30%;
     flex-direction: column;
     margin-top: 2rem;
@@ -130,6 +130,8 @@ main{
     cursor: pointer;
     justify-content: center;
     align-items: center;
+    height:90%;
+    aspect-ratio: 0.5;
     font-weight: bold;
     color: var(--text-primary);
     border-radius: 15%;
