@@ -138,6 +138,7 @@ main{
     border-width: 0;
     margin: 3px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.5em;
 
 }
 
@@ -154,11 +155,12 @@ main{
     color: var(--text-primary);
     border-radius: 10px;
     flex:1.5;
-    font-size: 12px;
+    font-size: 1rem;
     font-family: inherit;
     font-weight: bold;
     border: 0;
     margin: 3px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .return{
