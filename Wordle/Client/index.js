@@ -1,5 +1,5 @@
 //Imports
-//import * as rm from "./renderManager.js";
+import {homePage, statsPage} from "./renderManager.js";
 //Global variables
 let key = document.querySelectorAll('.key');
 let charIndex = 0; //This is the index for the div that you are typing in
@@ -54,9 +54,9 @@ enter.addEventListener('click', (event) => {
     else {console.log("This is not a full word please try again");}
 }})
 
-statsButton.addEventListener('click', (currentStat) => {statsPage(currentStat);});
+statsButton.addEventListener('click', () => {statsPage(currentStat);});
 
-homeButton.addEventListener('click', (currentStat) => {homePage(currentStat);});
+homeButton.addEventListener('click', () => {homePage(currentStat);});
 
 // This adds event listener to backspace
 back.addEventListener('click', (event) => {
@@ -72,6 +72,7 @@ back.addEventListener('click', (event) => {
 }})
 
 closeModal.addEventListener('click', () => {
+    console.log(currentStat);
     homePage(currentStat);
 })
 
@@ -351,63 +352,4 @@ function notAWord(){
         notif.classList.remove("fade-in");
         notif.className += " fade-out"
     }, 1200);
-}
-
-
-//Renders the word grid
-function setGrid (render){
-    let grid = document.querySelector(".word-grid");
-    grid.style.display = render;
-}
-
-//Renders the keyboard
-function setKeyboard (render) {
-    let keyboard = document.querySelector(".key-board");
-    keyboard.style.display = render;
-}
-
-//Renders stats page
-function setStatsPage (render){
-    let stats = document.querySelector(".stats");
-    let winStr = document.getElementById("winStreak");
-    var statValues = Object.values(currentStat);
-    winStr.textContent = currentStat.winStreak;
-    winPercentage();
-    let statsBars = document.querySelector(".statsContainer");
-    let maxGuess = 0;
-    var statValues = Object.values(currentStat);
-    for (let i = 0; i<statsBars.children.length; i++){
-        if(statValues[i]>maxGuess){maxGuess = statValues[i]}
-    }
-    var maxBarLength = 100/maxGuess;
-    for(let i = 0; i<statsBars.children.length; i++){
-        statsBars.children[i].children[1].textContent = statValues[i]
-        if (statValues[i]>0){
-            statsBars.children[i].children[1].textContent = statValues[i]
-            statsBars.children[i].children[1].style.width = ((statValues[i])*maxBarLength).toString() + "%";
-        }
-    }
-    stats.style.display = render;
-}
-
-function winPercentage(){
-    let winPer = document.getElementById("winPercentage");
-    let maxPercent = currentStat.wins+currentStat.loses;
-    if (maxPercent!=0){
-    let percentage = (Math.floor((((currentStat.wins/maxPercent)*100))).toString() + "%");
-    winPer.textContent = percentage;
-    }
-}
-
-//Renders home page
-function homePage() {
-    setGrid("grid");
-    setKeyboard("flex");
-    setStatsPage("none");
-}
-//Renders stats page
-function statsPage(){
-    setGrid("none");
-    setKeyboard("none");
-    setStatsPage("flex");
 }
