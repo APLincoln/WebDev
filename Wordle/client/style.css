@@ -396,6 +396,7 @@ button.flex-ele:hover{
     }
     .return{
         height:80%;
+        font-size: 12px;
     }
     .notif {
         width: 80%;
