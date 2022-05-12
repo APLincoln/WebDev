@@ -361,7 +361,7 @@ button.flex-ele:hover{
         max-width:75%
     }
     .letter-box{
-        max-width:3.8em;  
+        max-width:3.8em;
     }
     .key-board{
         margin-top: 2rem;
@@ -407,3 +407,8 @@ button.flex-ele:hover{
         width: 20%;
     }
 }
+@media (prefers-reduced-motion) {
+    .animation {
+      animation-name: dissolve;
+    }
+  }
