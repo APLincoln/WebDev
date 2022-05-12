@@ -58,7 +58,7 @@ main{
     grid-template-rows: repeat(6, 1fr);
     grid-template-columns: repeat(5, 1fr);
     gap: 0.5rem;
-    height:40%;
+    height:45%;
 }
 
 .letter-box{
@@ -384,6 +384,12 @@ button.flex-ele:hover{
     }
     .key-row{
         height:3.5em;
+    }
+    .key{
+        font-size: 12px;
+    }
+    .enter{
+        font-size: 12px;
     }
     .notif {
         width: 80%;
