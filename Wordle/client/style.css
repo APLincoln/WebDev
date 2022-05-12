@@ -251,8 +251,9 @@ button.flex-ele:hover{
     opacity: 90%;
     background-color: var(--border-primary);
     width: 100%;
-    height: 60%;
+    height: 70%;
     font-weight: bold;
+    justify-content: space-evenly;
 }
 
 .statsContainer{
@@ -260,7 +261,7 @@ button.flex-ele:hover{
     flex-direction: column;
     padding: 0;
     justify-content: center;
-    height: 50%;
+    height: 45%;
     width:90%;
 }
 
@@ -364,14 +365,13 @@ button.flex-ele:hover{
     }
     .key-board{
         margin-top: 2rem;
-        width: 90%;
+        width: 95%;
     }
     .key-row{
         height:3.5em;
     }
     .key{
         font-size: 12px;
-        aspect-ration: 0;
         height: 80%;
     }
     .enter{
