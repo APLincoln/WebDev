@@ -5,7 +5,7 @@ import * as db from './wordService.js';
 
 //This serves the client folder
 const app = express();
-app.use(express.static('Client'));
+app.use(express.static('client'));
 //app.use(cors({origin: "http://localhost:8080/"}))
 app.listen(8080);
 
