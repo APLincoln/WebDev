@@ -25,5 +25,16 @@
     "path": "^0.12.7",
     "sqlite": "^4.1.1",
     "sqlite3": "^5.0.8"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-portsoc": "github:portsoc/eslint-config-portsoc"
+  },
+  "eslintConfig": {
+    "extends": "portsoc",
+    "root": true,
+    "env": {
+      "browser": true
+    }
   }
 }

@@ -15,7 +15,7 @@
 
 <body>
     <div class="header">
-        <button id="homeButton" class="flex-ele">
+        <button id="homeButton" class="flex-ele" aria-label="Home">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor" stroke-width="1">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -23,7 +23,7 @@
             </svg>
         </button>
         <div>Wordle</div>
-        <button class="flex-ele" id="statsButton">
+        <button class="flex-ele" id="statsButton" aria-label="Stats">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor" stroke-width="1">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -70,7 +70,7 @@
                     <div class="bar">0</div>
                 </div>
             </div>
-            <button class="closeModal">Home</button>
+            <button class="closeModal" aria-label="Home">Home</button>
         </div>
         <div class="notif"></div>
         <div id="word_grid" class="word-grid">
@@ -140,7 +140,7 @@
                 <button class="key" id="b" data-key="b">b</button>
                 <button class="key" id="n" data-key="n">n</button>
                 <button class="key" id="m" data-key="m">m</button>
-                <button class="return" data-key="return">
+                <button class="return" data-key="return" aria-label="Back-space">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor" stroke-width="1">
                         <path stroke-linecap="round" stroke-linejoin="round"

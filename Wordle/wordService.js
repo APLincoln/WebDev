@@ -1,13 +1,13 @@
 import sqlite3 from 'sqlite3';
 import * as sqlite from 'sqlite';
-import wordFile from './words2.js';
+// import wordFile from './words2.js'; // This is used for initiating the db
 
 
-async function init() {
-  return new Promise(function(res, rej){
-    res(sqlite.open({filename: './words.db', driver: sqlite3.Database}))
-  })
-};
+function init() {
+  return new Promise(function (resolve) {
+    resolve(sqlite.open({ filename: './words.db', driver: sqlite3.Database }));
+  });
+}
 
 const dbConn = init();
 
@@ -27,19 +27,21 @@ export async function addWord(word) {
   await db.run('INSERT INTO Words (Word) VALUES (?)', [word]);
 }
 
-export async function isWord(inpWord){
+export async function isWord(inpWord) {
   const db = await dbConn;
   const word = await db.all('SELECT COUNT(*) FROM Words WHERE Word = ?', inpWord);
   let flag = false;
-  if((Object.values(word[0])[0])>0){flag = true;};
+  if ((Object.values(word[0])[0]) > 0) { flag = true; }
   return flag;
 }
 
-export async function wordCount(){
+export async function wordCount() {
   const db = await dbConn;
   const count = await db.all('SELECT COUNT(*) FROM Words');
   return Object.values(count[0])[0];
 }
+
+// This is used for making the db
 // let words = []
 // wordFile.forEach(element => {words.push(element.toUpperCase());});
 
