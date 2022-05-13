@@ -16,7 +16,7 @@ app will run on port 8080.
 
 | **API name** | **description** |
 | --- | --------- |
-| /checkWord | Takes an array of 5 characters in order and checks firstly if its a valid word then responds based on if the letter is in the word and if it is in the correct position |
+| /checkWord | Takes an array of 5 characters in order and checks firstly if its a valid word then responds with an array of Ints based on if the letter is in the word and if it is in the correct position |
 
 ## Core requirements
 
