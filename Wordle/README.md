@@ -12,6 +12,12 @@ npm start
 
 app will run on port 8080.
 
+## API overview
+
+| **API name** | **description** |
+| --- | --------- |
+| /checkWord | Takes an array of 5 characters in order and checks firstly if its a valid word then responds based on if the letter is in the word and if it is in the correct position |
+
 ## Core requirements
 
 The word of the day is selected on start of the server. This is then stored as a global variable on the server side for when the front end sends through a check request using the /wordCheck api end point.
@@ -31,7 +37,7 @@ The words list is stored in an sqlite db. There are currently 2499 words in this
 I chose to use local storage on the users browser to store game information as I felt this was more appropriate than cookies and allowed me more flexibility when storing information for the game
 
 gameState:
-| key | Description |
+| **key** | **Description** |
 | --- | ----------- |
 | currenGuess | This is the current guess the user is on and is used when resuming the game after page reload |
 | currentIndex | This is the current index the user is typing on ans is used when resuming game after page reload |
@@ -43,7 +49,7 @@ gameState:
 The date is checked every time the user reloads the page and if the day is less than the current day then gameState will be re initialized.
 
 gameStats:
-| key | Description |
+| **key** | **Description** |
 | --- | ----------- |
 | one | How many times user has guessed in one try |
 | two | How many times user has guessed in two tries |
@@ -55,8 +61,9 @@ gameStats:
 | wins | The total amount of wins. Used to calculate win percentage |
 | loses | The total amount of loses. Used to calculate win percentage |
 
-**Files**
-| name | Description |
+## File structure
+
+| **name** | **Description** |
 | --- | ----------- |
 | server.js | This is the sever and serves client folder and handles checking the word |
 | wordService.js | This is the database management service. It has a lot of functions that are used to interact with the database|
@@ -69,5 +76,6 @@ gameStats:
 ## Key features
 
 - **Double-tap zoom on ios:** I have double disabled double tap zoom on ios devices as I found this was an issue when testing my application on mobile. I did this using `touch-action: manipulation;`
-
-- **Word Selection:** Word section is done using an algorithm. I first get the day from unix milliseconds. I then divide the day by the length of the list of words as this is shorter than the day. I use the remainder as the word ID.
+- **Word Selection:** Word section is done using an algorithm. I first get the day from unix milliseconds. I then divide the day by the length of the list of words as this is shorter than the day. I use the remainder as the word ID for the word of the day. This way I can ensure that a new word is selected every day and if the server was to go down and back up the same word would be selected for that day.
+- **ARIA tags:** ARIA tags have been used on buttons that do not have text content to ensure that when someone who is blind plays the game they will receive appropriate audio for the button that is being highlighted.
+- **Own made scheduler:** I made my own schedule function that calculates how many milliseconds left in the day and uses a set timeout to change the word at the end of the day. This then recursively calls its self to reset the timeout.
