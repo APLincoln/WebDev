@@ -48,5 +48,3 @@ export async function wordCount() {
 // for (let i = 0; i<words.length; i++){
 //   await addWord(words[i]);
 // }
-
-console.log();

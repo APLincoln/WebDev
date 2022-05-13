@@ -73,7 +73,6 @@ back.addEventListener('click', () => {
 });
 
 closeModal.addEventListener('click', () => {
-  console.log(currentStat);
   homePage(currentStat);
 });
 
