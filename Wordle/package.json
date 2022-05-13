@@ -8,16 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/UP2044509/WebDev.git"
-  },
-  "author": "Arron",
+  "author": "up2044509",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/UP2044509/WebDev/issues"
-  },
-  "homepage": "https://github.com/UP2044509/WebDev#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.3",
